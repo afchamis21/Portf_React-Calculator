@@ -12,9 +12,6 @@ height: 100vh;
 box-sizing: border-box;
 font-family: 'Roboto', sans-serif;
 
-h1{
-  margin-bottom: 1rem;
-}
 body{
   height: 50rem;
   width: 34rem;
@@ -48,7 +45,7 @@ body{
       width: 8rem;
       border: none;
       border-radius:4rem;
-      font-size: 2rem;
+      font-size: 2.5rem;
       transition: filter 0.1s;
       background-color: #F0F2F5;
       box-shadow: 0 0 3px  #969CB3;
@@ -59,9 +56,17 @@ body{
       }
     } 
 
-    .GreenButton{
-      background-color:#33CC95;
+    .greenButton{
+      background-color:#26996f;
       color: #FFFFFF;
+    }
+
+    .greenText{
+      color:#26996f;
+    }
+
+    .redText{
+      color: #e52e4d;
     }
   }
 }
