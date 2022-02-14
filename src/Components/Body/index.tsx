@@ -8,6 +8,7 @@ export function Calculator(){
   const [oldValue, setOldValue] = useState(0)
   const [currentOperation, setCurrentOperation] = useState('')
   const [size, setSize] = useState(80)
+  
   function changeValue(content: string){
     if (value.length > 8) {
       setSize(80-(3.2*(value.length-8)))
@@ -43,27 +44,27 @@ export function Calculator(){
   function begginOperation(operation: string){
     switch(operation){
       case '+':
-        setOldValue(Number(value.replace('...','')))
+        setOldValue(Number(value))
         setValue('0')
         setCurrentOperation('+')
         break
       case '-':
-        setOldValue(Number(value.replace('...','')))
+        setOldValue(Number(value))
         setValue('0')
         setCurrentOperation('-')
         break
       case '*':
-        setOldValue(Number(value.replace('...','')))
+        setOldValue(Number(value))
         setValue('0')
         setCurrentOperation('*')
         break
       case '/':
-        setOldValue(Number(value.replace('...','')))
+        setOldValue(Number(value))
         setValue('0')
         setCurrentOperation('/')
         break
       case '%':
-        setValue(`${Number(value.replace('...','')) / 100}`)
+        setValue(`${Number(value) / 100}`)
     }
   }
 
@@ -71,22 +72,23 @@ export function Calculator(){
     let result = ''
     switch(currentOperation){
       case '+':
-        result = `${Number(value.replace('...','')) + oldValue}`
+        result = `${Number(value) + oldValue}`
         setOldValue(0)
         break
 
       case '-':
-        result = `${ oldValue - Number(value.replace('...',''))}`
+        result = `${ oldValue - Number(value)}`
         setOldValue(0)
         break
 
       case '*':
-        result = `${Number(value.replace('...','')) * oldValue}`
+        result = `${Number(value) * oldValue}`
         setOldValue(0)
         break
         
       case '/':
-        result = `${Number(value.replace('...','')) / oldValue}`
+        result = `${oldValue / Number(value)}`
+        console.log(value, oldValue)
         setOldValue(0)
         break
       
