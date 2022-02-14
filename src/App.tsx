@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { Calculator } from "./Components/Body";
 
 function App() {
   return (
-    <h1>Hello World!</h1>
+    <Calculator/>
   )
 }
 
