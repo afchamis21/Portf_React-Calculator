@@ -3,21 +3,24 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
-
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
+display: grid;
+grid-template-columns: max(20rem, 30vw) 1fr;
 height: 100vh;
 box-sizing: border-box;
 font-family: 'Roboto', sans-serif;
 
-body{
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  body{
   height: 50rem;
   width: 34rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   .display{
     box-sizing: border-box;
@@ -70,4 +73,6 @@ body{
     }
   }
 }
+}
+
 `

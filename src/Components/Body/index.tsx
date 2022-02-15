@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { OperationList } from "../OperationList";
 import { Container } from "./styles";
 
 
@@ -8,7 +9,8 @@ export function Calculator(){
   const [oldValue, setOldValue] = useState(0)
   const [currentOperation, setCurrentOperation] = useState('')
   const [size, setSize] = useState(80)
-  
+  const [history, setHistory] = useState<string[]>([])
+
   function changeValue(content: string){
     if (value.length > 8) {
       setSize(80-(3.2*(value.length-8)))
@@ -34,6 +36,7 @@ export function Calculator(){
     setOldValue(0)
     setCurrentOperation('')
     setSize(80)
+    setHistory([])
 
   }
 
@@ -45,21 +48,25 @@ export function Calculator(){
     switch(operation){
       case '+':
         setOldValue(Number(value))
+        setHistory([...history, value + ' +'])
         setValue('0')
         setCurrentOperation('+')
         break
       case '-':
         setOldValue(Number(value))
+        setHistory([...history, value + ' -'])
         setValue('0')
         setCurrentOperation('-')
         break
       case '*':
         setOldValue(Number(value))
+        setHistory([...history, value + ' *'])
         setValue('0')
         setCurrentOperation('*')
         break
       case '/':
         setOldValue(Number(value))
+        setHistory([...history, value + ' /'])
         setValue('0')
         setCurrentOperation('/')
         break
@@ -73,21 +80,25 @@ export function Calculator(){
     switch(currentOperation){
       case '+':
         result = `${Number(value) + oldValue}`
+        setHistory([...history, value + ' + ' + oldValue.toString() +' = '+ result])
         setOldValue(0)
         break
 
       case '-':
         result = `${ oldValue - Number(value)}`
+        setHistory([...history,oldValue.toString() + ' - ' + value +' = '+ result])
         setOldValue(0)
         break
 
       case '*':
         result = `${Number(value) * oldValue}`
+        setHistory([...history, value + ' * ' + oldValue.toString() +' = '+ result])
         setOldValue(0)
         break
         
       case '/':
         result = `${oldValue / Number(value)}`
+        setHistory([...history,oldValue.toString() + ' / ' + value +' = '+ result])
         console.log(value, oldValue)
         setOldValue(0)
         break
@@ -102,31 +113,36 @@ export function Calculator(){
     
   return(
     <Container>
-      <body>
-        <div className="display" style={{fontSize: size}}> {value}</div> 
-        <div className="buttonArea">
-          <button className="redText" onClick={resetValue}>C</button>
-          <button className="redText" onClick={completeReset}>AC</button>
-          <button className="greenText" onClick={()=>begginOperation('%')}>%</button>
-          <button className="greenText" onClick={()=>begginOperation('/')} >÷</button>
-          <button onClick={()=>changeValue('7')}>7</button>
-          <button onClick={()=>changeValue('8')}>8</button>
-          <button onClick={()=>changeValue('9')}>9</button>
-          <button className="greenText" onClick={()=>begginOperation('*')}>X</button>
-          <button onClick={()=>changeValue('4')}>4</button>
-          <button onClick={()=>changeValue('5')}>5</button>
-          <button onClick={()=>changeValue('6')}>6</button>
-          <button className="greenText" onClick={()=>begginOperation('-')}>-</button>
-          <button onClick={()=>changeValue('1')}>1</button>
-          <button onClick={()=>changeValue('2')}>2</button>
-          <button onClick={()=>changeValue('3')}>3</button>
-          <button className="greenText" onClick={()=>begginOperation('+')}>+</button>
-          <button onClick={inverse}>±</button>
-          <button onClick={()=>changeValue('0')}>0</button>
-          <button onClick={()=>changeValue('.')}>.</button>
-          <button className="greenButton" onClick={completeOperation}>=</button>
-        </div>
-      </body>
+      <aside>
+        <OperationList history={history}/>
+      </aside>
+      <div className="container">
+        <body>
+          <div className="display" style={{fontSize: size}}> {value}</div> 
+          <div className="buttonArea">
+            <button className="redText" onClick={resetValue}>C</button>
+            <button className="redText" onClick={completeReset}>AC</button>
+            <button className="greenText" onClick={()=>begginOperation('%')}>%</button>
+            <button className="greenText" onClick={()=>begginOperation('/')} >÷</button>
+            <button onClick={()=>changeValue('7')}>7</button>
+            <button onClick={()=>changeValue('8')}>8</button>
+            <button onClick={()=>changeValue('9')}>9</button>
+            <button className="greenText" onClick={()=>begginOperation('*')}>X</button>
+            <button onClick={()=>changeValue('4')}>4</button>
+            <button onClick={()=>changeValue('5')}>5</button>
+            <button onClick={()=>changeValue('6')}>6</button>
+            <button className="greenText" onClick={()=>begginOperation('-')}>-</button>
+            <button onClick={()=>changeValue('1')}>1</button>
+            <button onClick={()=>changeValue('2')}>2</button>
+            <button onClick={()=>changeValue('3')}>3</button>
+            <button className="greenText" onClick={()=>begginOperation('+')}>+</button>
+            <button onClick={inverse}>±</button>
+            <button onClick={()=>changeValue('0')}>0</button>
+            <button onClick={()=>changeValue('.')}>.</button>
+            <button className="greenButton" onClick={completeOperation}>=</button>
+          </div>
+        </body>
+      </div>
     </Container>
   )
 }
